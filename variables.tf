@@ -10,10 +10,6 @@ variable "name_suffix" {
 variable "account_id" {
   description = "Will be used as part of the username-portion of email address generated for the service account."
   type        = string
-  validation {
-    condition     = length(var.account_id) <= 25
-    error_message = "A max of 25 characters is allowed."
-  }
 }
 
 variable "display_name" {
