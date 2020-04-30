@@ -8,8 +8,8 @@ provider "google" {
 }
 
 locals {
-  full_account_id   = format("%s-%s", var.account_id, var.tf_env)
-  full_display_name = format("%s-%s", var.display_name, var.tf_env)
+  full_account_id   = format("%s-%s", var.account_id, var.name_suffix)
+  full_display_name = format("%s-%s", var.display_name, var.name_suffix)
   logging_and_monitoring_roles = [
     "roles/logging.logWriter",
     "roles/monitoring.metricWriter",
