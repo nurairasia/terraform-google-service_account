@@ -10,13 +10,7 @@ provider "google" {
 locals {
   full_account_id   = format("%s-%s", var.account_id, var.name_suffix)
   full_display_name = format("%s-%s", var.display_name, var.name_suffix)
-  logging_and_monitoring_roles = [
-    "roles/logging.logWriter",
-    "roles/monitoring.metricWriter",
-    "roles/stackdriver.resourceMetadata.writer"
-    # see https://cloud.google.com/monitoring/kubernetes-engine/observing#troubleshooting
-  ]
-  all_roles                      = toset(concat(local.logging_and_monitoring_roles, var.roles))
+  all_roles                      = toset(var.roles)
   sensitive_roles                = ["roles/owner" /* we want to prevent terraform from granting sensitive roles to any resources */]
   filtered_service_account_roles = setsubtract(local.all_roles, local.sensitive_roles)
 }
