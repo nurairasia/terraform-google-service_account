@@ -10,9 +10,9 @@ provider "google" {
 locals {
   full_account_id   = format("%s-%s", var.account_id, var.name_suffix)
   full_display_name = format("%s-%s", var.display_name, var.name_suffix)
-  all_roles                      = toset(var.roles)
+  roles                      = toset(var.roles)
   sensitive_roles                = ["roles/owner" /* we want to prevent terraform from granting sensitive roles to any resources */]
-  filtered_service_account_roles = setsubtract(local.all_roles, local.sensitive_roles)
+  filtered_roles = setsubtract(local.roles, local.sensitive_roles)
 }
 
 resource "google_service_account" "service_account" {
@@ -23,7 +23,7 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_project_iam_member" "project_roles" {
-  for_each   = local.filtered_service_account_roles
+  for_each   = local.filtered_roles
   role       = each.value
   member     = "serviceAccount:${google_service_account.service_account.email}"
   depends_on = [var.module_depends_on]
