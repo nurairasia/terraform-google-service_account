@@ -8,7 +8,7 @@ provider "google" {
 }
 
 locals {
-  full_account_id   = format("%s-%s", var.account_id, var.name_suffix)
+  full_account_id   = format("%s-sa-%s", var.account_id, var.name_suffix)
   full_display_name = format("%s-ServiceAccount-%s", var.display_name, var.name_suffix)
   roles             = toset(var.roles)
   sensitive_roles   = ["roles/owner" /* we want to prevent terraform from granting sensitive roles to any resources */]
