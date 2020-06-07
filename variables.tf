@@ -11,7 +11,7 @@ variable "name_suffix" {
   }
 }
 
-variable "account_id" {
+variable "name" {
   description = "Will be used as part of the username-portion of email address generated for the service account."
   type        = string
 }
