@@ -2,10 +2,6 @@ terraform {
   required_version = ">= 0.13.1" # see https://releases.hashicorp.com/terraform/
 }
 
-provider "google" {
-  version = ">= 3.13.0" # see https://github.com/terraform-providers/terraform-provider-google/releases
-}
-
 locals {
   full_account_id   = format("%s-sa-%s", var.name, var.name_suffix)
   full_display_name = format("%s ServiceAccount-%s", var.display_name, var.name_suffix)
