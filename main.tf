@@ -14,12 +14,10 @@ resource "google_service_account" "service_account" {
   account_id   = local.full_account_id
   display_name = local.full_display_name
   description  = var.description
-  depends_on   = [var.module_depends_on]
 }
 
 resource "google_project_iam_member" "project_roles" {
   for_each   = local.filtered_roles
   role       = each.value
   member     = "serviceAccount:${google_service_account.service_account.email}"
-  depends_on = [var.module_depends_on]
 }
