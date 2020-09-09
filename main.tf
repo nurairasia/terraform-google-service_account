@@ -17,7 +17,7 @@ resource "google_service_account" "service_account" {
 }
 
 resource "google_project_iam_member" "project_roles" {
-  for_each   = local.filtered_roles
-  role       = each.value
-  member     = "serviceAccount:${google_service_account.service_account.email}"
+  for_each = local.filtered_roles
+  role     = each.value
+  member   = "serviceAccount:${google_service_account.service_account.email}"
 }
