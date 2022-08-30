@@ -2,6 +2,8 @@ terraform {
   required_version = ">= 0.13.1" # see https://releases.hashicorp.com/terraform/
 }
 
+data "google_client_config" "google_client" {}
+
 locals {
   full_account_id   = format("%s-%s", var.name, var.name_suffix)
   full_display_name = format("%s %s", var.display_name, var.name_suffix)
@@ -18,6 +20,7 @@ resource "google_service_account" "service_account" {
 
 resource "google_project_iam_member" "project_roles" {
   for_each = local.filtered_roles
+  project  = data.google_client_config.google_client.project
   role     = each.value
   member   = "serviceAccount:${google_service_account.service_account.email}"
 }
