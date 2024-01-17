@@ -36,3 +36,9 @@ variable "roles" {
   type        = list(string)
   default     = []
 }
+
+variable "full_account_id" {
+  description = "The account id that is used to generate the service account email address and a stable unique id. Must be 6-30 characters long, and match the regular expression [a-z]([-a-z0-9]*[a-z0-9])."
+  type = string
+  default = ""
+}

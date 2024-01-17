@@ -13,7 +13,7 @@ locals {
 }
 
 resource "google_service_account" "service_account" {
-  account_id   = local.full_account_id
+  account_id   = var.full_account_id != "" ? var.full_account_id : local.full_account_id
   display_name = local.full_display_name
   description  = var.description
 }
