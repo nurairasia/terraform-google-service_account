@@ -23,4 +23,13 @@ resource "google_project_iam_member" "project_roles" {
   project  = data.google_client_config.google_client.project
   role     = each.value
   member   = "serviceAccount:${google_service_account.service_account.email}"
+  dynamic "condition" {
+    for_each = var.conditions[each.value]
+    iterator = condition
+    content {
+      title       = condition.title
+      description = condition.title
+      expression  = condition.expression
+    }
+  }
 }
