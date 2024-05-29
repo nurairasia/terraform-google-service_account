@@ -45,6 +45,9 @@ variable "account_id" {
 
 variable "conditions" {
   description = "IAM roles conditions to be added to the service account. See https://cloud.google.com/iam/docs/conditions-overview"
-  type        = map(string)
-  default     = {}
+  type = map(object({
+    title      = string
+    expression = string
+  }))
+  default = {}
 }
