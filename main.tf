@@ -25,7 +25,6 @@ resource "google_project_iam_member" "project_roles" {
   member   = "serviceAccount:${google_service_account.service_account.email}"
   dynamic "condition" {
     for_each = contains(keys(var.conditions), each.value) ? [lookup(var.conditions, each.value)] : []
-    # iterator = mycondition
     content {
       title       = condition.value.title
       description = condition.value.title
